@@ -11,12 +11,33 @@ body {
 	margin: 0;
 	position: relative;
     background: url(../images/main3.jpg) no-repeat center top;
-	background-size: auto 80%;
+	background-size: cover;
+	background-repeat: no-repeat;
     min-height: 100vh;
+    background-position: center bottom;
 }
 
 img {
 	max-width: 100%;
+}
+
+.overflow {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+	opacity: 1;
+	background: #000;
+}
+
+.overflow img{
+	cursor: pointer;
+	user-select: none;
 }
 
 .container {
@@ -30,6 +51,7 @@ img {
 	width: 100%;
 	max-width: 900px;
 	padding-top: 50px;
+	align-self: flex-end;
 }
 
 .swiper-wrapper {
@@ -43,8 +65,44 @@ img {
 	width: 300px;
 	overflow: hidden;
 	height: 300px;
+	transition: opacity 2s!important;
 }
 
 .swiper-slide img {
 	opacity: 0;
+}
+
+.swiper-slide-prev, .swiper-slide-next {
+	opacity: 0.33;
+	transition: opacity 2s!important;
+}
+
+@media screen and (max-width: 1024px) {
+	.swiper-container {
+		max-width: 750px;
+	}
+	.swiper-slide {
+		width: 250px;
+		height: 250px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.swiper-container {
+		max-width: 600px;
+	}
+	.swiper-slide {
+		width: 200px;
+		height: 200px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.swiper-container {
+		max-width: 360px;
+	}
+	.swiper-slide {
+		width: 120px;
+		height: 120px;
+	}
 }
