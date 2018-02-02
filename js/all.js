@@ -1,45 +1,105 @@
 $(document).ready(function() {
-	var slideItem = $('.js-slide');
-	var slideImg = slideItem.find('.js-slide-image');
-	slideItem.on('click', function() {
-		$(this).toggleClass('active');
-	});
+    var wrapper = $('.j-wrapper');
+    var animatedParent = null;
+    var initialSlide = $('.j-initial-slide');
 
-    slideImg.on('animationend animationend webkitAnimationEnd oanimationend MSAnimationEnd', function () {
-        $(this).parent().addClass('animation-end');
+    wrapper.on('click', function () {
+        var index = $(this).data('index');
+        animatedParent = $(this).parent();
+
+        if (index===0) {
+            $($('.swiper-container')[1]).hide();
+            animatedParent.next().animate({
+                right: '25%'
+            }, 1000);
+
+            animatedParent.addClass('active').animate({
+                left: '25%'
+            }, 1000, function() {
+                $(wrapper[1]).parent().hide();
+                var slide = initialSlide[0];
+                var top = slide.getBoundingClientRect().top;
+                var left = slide.getBoundingClientRect().left;
+                $(this).animate({
+                    top: top,
+                    left: left,
+                    width: 300,
+                    height: 300
+                }, 1000, function() {
+                    $(this).fadeOut(1000);
+                    $('.j-overflow').fadeOut(1000);
+                });
+            });
+        }
+
+        if (index===1) {
+            $($('.swiper-container')[0]).hide();
+            animatedParent.prev().animate({
+                left: '25%'
+            }, 1000);
+
+            animatedParent.addClass('active').animate({
+                right: '25%'
+            }, 1000, function() {
+                $(wrapper[0]).parent().hide();
+                var slide = initialSlide[1];
+                var top = slide.getBoundingClientRect().top;
+                var left = slide.getBoundingClientRect().left;
+                $(this).animate({
+                    top: top,
+                    left: left,
+                    width: 300,
+                    height: 300
+                }, 1000, function() {
+                    $(this).fadeOut(1000);
+                    $('.j-overflow').fadeOut(1000);
+                });
+            });
+        }
     });
 
-    $('.js-slide-backface').on('animationend animationend webkitAnimationEnd oanimationend MSAnimationEnd', function () {
-        var imgPosition = $(this)[0].getBoundingClientRect();
-        insertContent(this, imgPosition);
+
+    // swiper init
+    new Swiper('.swiper-container', {
+        pagination: false,
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        initialSlide: 0,
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        },
+        breakpoints: {
+            768: {
+            }
+        }
     });
 
-    function insertContent(el, boundingRect) {
-        var x = el.cloneNode(true);
-        wrap(el, boundingRect);
-    }
+    // magnific init
+    $('.image-link').magnificPopup({
+        type: 'image',
+        mainClass: 'mfp-with-zoom', // this class is for CSS animation below
 
-    function wrap(el, wrapper) {
-        var newDiv = document.createElement('div');
-            newDiv.innerHTML = el.outerHTML;
-            $(newDiv).appendTo('body');
+        zoom: {
+            enabled: true, // By default it's false, so don't forget to enable it
 
-        var left  = wrapper.left;
-        var top  = wrapper.top;
-        var width  = wrapper.width;
-        var height  = wrapper.height;
+            duration: 300, // duration of the effect, in milliseconds
+            easing: 'ease-in-out', // CSS transition easing function
 
-        newDiv.setAttribute('style',
-            'position: fixed;' +
-            'left:' + left + 'px;' +
-            'top:' + top + 'px;' +
-            'width:' + width + 'px;' +
-            'height:' + height + 'px;' +
-            'background: #fff;'
-        );
+            // The "opener" function should return the element from which popup will be zoomed in
+            // and to which popup will be scaled down
+            // By defailt it looks for an image tag:
+            opener: function(openerElement) {
+                // openerElement is the element on which popup was initialized, in this case its <a> tag
+                // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+                return openerElement.is('img') ? openerElement : openerElement.find('img');
+            }
+        }
 
-        setTimeout(function() {
-            newDiv.classList.value = 'popup-wrapper';
-        }, 0)
-    }
+    });
 });

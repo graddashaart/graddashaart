@@ -31,13 +31,49 @@ img {
 	align-items: center;
 	justify-content: center;
 	z-index: 100;
-	opacity: 1;
-	background: #000;
+	transform: translate3d(0,0,0);
+    background: rgba(0,0,0,.7);
 }
 
-.overflow img{
+.overflow img {
 	cursor: pointer;
 	user-select: none;
+}
+
+.overflow-column {
+	width: 50%;
+    height: 100%;
+    position: fixed;
+    background-size: cover;
+	background-position: top center;
+}
+
+.overflow-column.active {
+    z-index: 2;
+}
+
+.overflow-column:first-child {
+	left: 0;
+}
+
+.overflow-column:last-child {
+    right: 0;
+}
+
+.overflow-inner {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    background: #000;
+    transition: all 1s;
+}
+
+.overflow-column:hover .overflow-inner {
+    opacity: 0;
 }
 
 .container {
@@ -52,6 +88,9 @@ img {
 	max-width: 900px;
 	padding-top: 50px;
 	align-self: flex-end;
+    position: absolute;
+	left: 0;
+    right: 0;
 }
 
 .swiper-wrapper {

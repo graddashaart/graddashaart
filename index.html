@@ -11,35 +11,69 @@
 	<script src="./js/jquery-3.2.1.min.js"></script>
 </head>
 	<body>
-		<div class="js-overflow overflow">
-			<img src="./images/icon.jpg">
+		<div class="j-overflow overflow">
+			<div class="overflow-column" style="background-image: url(./images/art/6.jpg)">
+				<div class="overflow-inner j-wrapper" data-index="0"></div>
+			</div>
+			<div class="overflow-column" style="background-image: url(./images/graphic/3.jpg)">
+				<div class="overflow-inner j-wrapper" data-index="1"></div>
+			</div>
 		</div>
 		<div class="container">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-image: url(./images/1.jpg)">
-						<a href="./images/1.jpg" class="image-link">
-						   <img src="./images/1.jpg" />
+					<div class="swiper-slide j-initial-slide" style="background-image: url(./images/art/6.jpg)">
+						<a href="./images/art/6.jpg" class="image-link">
+							<img src="./images/art/6.jpg" />
 						</a>
 					</div>
-					<div class="swiper-slide" style="background-image: url(./images/2.jpg)">
-						<a href="./images/2.jpg" class="image-link">
-						   <img src="./images/2.jpg" />
+					<div class="swiper-slide j-initial-slide" style="background-image: url(./images/art/5.jpg)">
+						<a href="./images/art/5.jpg" class="image-link">
+							<img src="./images/art/5.jpg" />
 						</a>
 					</div>
-					<div class="swiper-slide" style="background-image: url(./images/3.jpg)">
-						<a href="./images/3.jpg" class="image-link">
-						   <img src="./images/3.jpg" />
+					<div class="swiper-slide" style="background-image: url(./images/art/1.jpg)">
+						<a href="./images/art/1.jpg" class="image-link">
+						   <img src="./images/art/1.jpg" />
 						</a>
 					</div>
-					<div class="swiper-slide" style="background-image: url(./images/4.jpg)">
-						<a href="./images/4.jpg" class="image-link">
-						   <img src="./images/4.jpg" />
+					<div class="swiper-slide" style="background-image: url(./images/art/2.jpg)">
+						<a href="./images/art/2.jpg" class="image-link">
+						   <img src="./images/art/2.jpg" />
 						</a>
 					</div>
-					<div class="swiper-slide" style="background-image: url(./images/5.jpg)">
-						<a href="./images/5.jpg" class="image-link">
-						   <img src="./images/5.jpg" />
+					<div class="swiper-slide" style="background-image: url(./images/art/3.jpg)">
+						<a href="./images/art/3.jpg" class="image-link">
+						   <img src="./images/art/3.jpg" />
+						</a>
+					</div>
+					<div class="swiper-slide" style="background-image: url(./images/art/4.jpg)">
+						<a href="./images/art/4.jpg" class="image-link">
+						   <img src="./images/art/4.jpg" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide j-initial-slide" style="background-image: url(./images/graphic/3.jpg)">
+						<a href="./images/graphic/3.jpg" class="image-link">
+							<img src="./images/graphic/3.jpg" />
+						</a>
+					</div>
+					<div class="swiper-slide" style="background-image: url(./images/graphic/1.jpg)">
+						<a href="./images/graphic/1.jpg" class="image-link">
+							<img src="./images/graphic/1.jpg" />
+						</a>
+					</div>
+					<div class="swiper-slide" style="background-image: url(./images/graphic/2.jpg)">
+						<a href="./images/graphic/2.jpg" class="image-link">
+							<img src="./images/graphic/2.jpg" />
+						</a>
+					</div>
+					<div class="swiper-slide" style="background-image: url(./images/graphic/4.jpg)">
+						<a href="./images/graphic/4.jpg" class="image-link">
+							<img src="./images/graphic/4.jpg" />
 						</a>
 					</div>
 				</div>
@@ -47,59 +81,6 @@
 		</div>
 		<script src="./js/jquery.magnific-popup.min.js"></script>
 		<script src="./js/swiper.min.js"></script>
-		<script>
-	        var swiper = new Swiper('.swiper-container', {
-	            pagination: false,
-	            effect: 'coverflow',
-	            grabCursor: true,
-	            centeredSlides: true,
-	            slidesPerView: 'auto',
-	            initialSlide: 1,
-	            coverflow: {
-	                rotate: 50,
-	                stretch: 0,
-	                depth: 100,
-	                modifier: 1,
-	                slideShadows : true
-	            },
-	            breakpoints: {
-	            	768: {
-	            	}
-	            }
-	        });
-		</script>
-		<script>
-			$(document).ready(function() {
-				$('.image-link').magnificPopup({
-				  type: 'image',
-				  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-
-				  zoom: {
-				    enabled: true, // By default it's false, so don't forget to enable it
-
-				    duration: 300, // duration of the effect, in milliseconds
-				    easing: 'ease-in-out', // CSS transition easing function
-
-				    // The "opener" function should return the element from which popup will be zoomed in
-				    // and to which popup will be scaled down
-				    // By defailt it looks for an image tag:
-				    opener: function(openerElement) {
-				      // openerElement is the element on which popup was initialized, in this case its <a> tag
-				      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-				      return openerElement.is('img') ? openerElement : openerElement.find('img');
-				    }
-				  }
-
-				});
-
-				setTimeout(function() {
-					$('.js-overflow img').parent().fadeOut(2000);
-				}, 3000);
-
-				$('.js-overflow img').on('click', function () {
-					$(this).parent().fadeOut(2000)
-				})
-			})
-		</script>
+		<script src="./js/all.js"></script>
 	</body>
 </html>
